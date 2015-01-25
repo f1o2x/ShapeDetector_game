@@ -1,0 +1,11 @@
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\UnityEditor.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\UnityEngine.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\UnityEngine.UI.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\Mono.Cecil.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\nunit.framework.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\Unity.DataContract.dll
+D:\Documents\ShapeDetector_Project\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Documents\ShapeDetector_Project\obj\Debug\Assembly-CSharp.dll
+D:\Documents\ShapeDetector_Project\obj\Debug\Assembly-CSharp.pdb
