@@ -126,23 +126,16 @@ class Shape
 
 class Figure : Shape
 {
-    enum shapes { triangle = 3, rectangle };
+    enum figures { start, triangle, rectangle, end};
+    int[] main_points = {-1, 3, 4 };
     public Figure(GameObject inst, float line_w) : base(inst, line_w)
     {
         CreateNewShape();
     }
     public void CreateNewShape()
     {
-        shapes shape = (shapes)Random.Range((int) shapes.triangle, (int)(shapes.rectangle));
-        switch (shape)
-        {
-            case shapes.triangle:
-                AddVertices(instance.transform.position, (int) shapes.triangle);
-                break;
-            case shapes.rectangle:
-                AddVertices(instance.transform.position, (int) shapes.rectangle);
-                break;
-        }
+        figures figure = (figures) Random.Range((int) figures.start + 1, (int) (figures.end) );
+        AddVertices(instance.transform.position, main_points[ (int) figure] );
     }
 
     public void AddVertices(Vector3 coords, int vert_count)
