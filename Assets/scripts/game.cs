@@ -2,6 +2,21 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+public struct TemplateInfo
+{
+    public string name;
+    public int count_vertices;
+    public List<Vector3> vertices;
+
+    public TemplateInfo(string name, int count_vert, List<Vector3> vert)
+    {
+        this.name = name;
+        count_vertices = count_vert;
+        vertices = new List<Vector3>();
+        vertices.InsertRange(0, vert);
+    }
+}
+
 class Shape
 {
     protected GameObject instance;
@@ -60,6 +75,7 @@ class Shape
     {
         return Mathf.Atan2(finish.y - start.y, finish.x - start.x);
     }
+
 
     public void FillArr(bool is_target)
     {
@@ -123,26 +139,22 @@ class Shape
     }
 }
 
-
 class Figure : Shape
 {
-    enum figures { start, triangle, rectangle, end};
-    int[] main_points = {-1, 3, 4 };
-    public Figure(GameObject inst, float line_w) : base(inst, line_w)
+    List<TemplateInfo> figures_list;
+    public Figure(GameObject inst, float line_w, List<TemplateInfo> FIGURES_LIST)
+        : base(inst, line_w)
     {
+        figures_list = FIGURES_LIST;
         CreateNewShape();
     }
+
     public void CreateNewShape()
     {
-        figures figure = (figures) Random.Range((int) figures.start + 1, (int) (figures.end) );
-        AddVertices(instance.transform.position, main_points[ (int) figure] );
-    }
-
-    public void AddVertices(Vector3 coords, int vert_count)
-    {
-        int rnd = 200;
-        for (int i = 0; i < vert_count; i++)
-            AddVertex(coords + 
+        int figure = Random.Range(0, figures_list.Count);
+        int rnd = 50;
+        for (int i = 0; i < figures_list[figure].count_vertices; i++)
+            AddVertex(instance.transform.position + figures_list[figure].vertices[i] + 
                 new Vector3(Random.Range(-rnd, rnd), Random.Range(-rnd, rnd), 0));
         AddVertex(points[0]);
     }
@@ -168,7 +180,24 @@ public class game : MonoBehaviour
 
 	void Start()    
 	{
-        target = new Figure(GameObject.FindGameObjectWithTag("Target"), 10f);
+        int scale = 100;
+        List<TemplateInfo> FIGURES_LIST = new List<TemplateInfo>();
+        List<Vector3> vectors = new List<Vector3>();
+        vectors.Add(new Vector3(-1, -1, 0) * scale);
+        vectors.Add(new Vector3(0, 1, 0) * scale);
+        vectors.Add(new Vector3(1, 1, 0) * scale);
+        FIGURES_LIST.Add(new TemplateInfo("triangle", 3, vectors));
+        vectors.RemoveRange(0, vectors.Count);
+
+        vectors.Add(new Vector3(-1, -1, 0) * scale);
+        vectors.Add(new Vector3(-1, 1, 0) * scale);
+        vectors.Add(new Vector3(1, 1, 0) * scale);
+        vectors.Add(new Vector3(1, -1, 0) * scale);
+        FIGURES_LIST.Add(new TemplateInfo("rectangle", 4, vectors));
+        vectors.RemoveRange(0, vectors.Count);
+
+
+        target = new Figure(GameObject.FindGameObjectWithTag("Target"), 10f, FIGURES_LIST);
         user = new Shape(gameObject, 2f);
         particles = GameObject.FindGameObjectWithTag("Particles");
 		time_left = time_start;
