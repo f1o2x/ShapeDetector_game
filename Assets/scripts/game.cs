@@ -195,8 +195,9 @@ public class game : MonoBehaviour
         vectors.Add(new Vector3(1, -1, 0) * scale);
         FIGURES_LIST.Add(new TemplateInfo("rectangle", 4, vectors));
         vectors.RemoveRange(0, vectors.Count);
+        //add figures here
 
-
+        //stop adding figurs here
         target = new Figure(GameObject.FindGameObjectWithTag("Target"), 10f, FIGURES_LIST);
         user = new Shape(gameObject, 2f);
         particles = GameObject.FindGameObjectWithTag("Particles");
